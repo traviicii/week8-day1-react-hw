@@ -2,20 +2,38 @@ import React, { Component } from 'react'
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './views/Home';
-import ToDo from './views/ToDo';
+import ToDoList from './views/ToDoList';
 import Signin from './views/Signin';
+import Signup from './views/Signup';
 
 export default class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      user: {}
+    }
+  }
+
+  logMeIn = (user) => {
+    this.setState({user: user})
+  }
+
+  logMeOut = () => {
+    this.setState({user: {}})
+  }
+
+
   render() {
     return (
       <div>
-        <Navbar />
+        <Navbar  user={this.state.user} logMeOut={this.logMeOut}/>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/ToDo' element={<ToDo />} />
-          <Route path='/SignIn' element={<Signin/>} />
+          <Route path='/todolist' element={<ToDoList />} />
+          <Route path='/signin' element={<Signin logMeIn = {this.logMeIn}/>} />
+          <Route path='/signup' element={<Signup />}/>
         </Routes>
-        App is always here because it encompasses everything
+        App is always here because it encompasses everything. This could be a footer.
         </div>
     )
   }
