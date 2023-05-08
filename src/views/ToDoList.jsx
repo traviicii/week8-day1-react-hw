@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import ToDos from '../components/ToDos';
 
 
-export default function ToDo({ ToDos }) {
+export default function ToDoList() {
 
   const [todos, setTodos] = useState([]);
   const [inputText, setInputText] = useState('');
@@ -15,8 +16,6 @@ export default function ToDo({ ToDos }) {
     // this.setState({todos: newstate, inputText: ''})
     // console.log(e.target[0].value)
     console.log(newstate)
-
-
   }
 
   const handleChange = (e) => {
@@ -24,8 +23,7 @@ export default function ToDo({ ToDos }) {
   }
 
   const showTodos = () => {
-    return todos.map((todo, index) => {<ToDos key={index} todo={todo} />})
-    // return todos.map((content, index) => <ToDos key={index} content={content} />)
+    return todos.map((todo, index) => <ToDos key={index} index={index} todo={todo} todos={todos} setTodos={setTodos}/>)
   }
 
   return (

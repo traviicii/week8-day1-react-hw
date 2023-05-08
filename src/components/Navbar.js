@@ -18,7 +18,7 @@ export default class Navbar extends Component {
                   <Link className="nav-link" aria-current="page" to="/">Home</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/todolist">ToDo List</Link>
+                  <Link className="nav-link" to="/todolist" onClick={this.isLoggedIn}>ToDo List</Link>
                 </li>
                 {
                   this.props.user.apitoken ? //if logged in

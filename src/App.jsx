@@ -22,11 +22,13 @@ export default class App extends Component {
     this.setState({user: {}})
   }
 
+  isLoggedIn = () => {}
+
 
   render() {
     return (
       <div>
-        <Navbar  user={this.state.user} logMeOut={this.logMeOut}/>
+        <Navbar  user={this.state.user} logMeOut={this.logMeOut} isLoggedIn={this.isLoggedIn}/>
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/todolist' element={<ToDoList />} />
