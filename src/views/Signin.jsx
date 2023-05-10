@@ -1,7 +1,9 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 export default function Signin({ logMeIn }) {
+
+    const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -28,6 +30,7 @@ export default function Signin({ logMeIn }) {
             const myUserInfo = data.data
             console.log(myUserInfo)
             logMeIn(myUserInfo)
+            navigate('/')
         }
 
     }
