@@ -2,9 +2,10 @@ import React from 'react'
 
 
 export default function Cart({user, removeFromCart, cart}) {
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
+
     console.log(cart, 'right here');
     const getUniqueCart = (cart) => {
-        console.log(cart, "inside unique")
         const uniqueCart = []
         const id = new Set();
 
@@ -45,6 +46,12 @@ export default function Cart({user, removeFromCart, cart}) {
         }
     };
 
+    const generateInputTags = () => {
+        // return Object.keys(cart).map(key => <input key={`input_${key}`} name={cart[key].product_name} defaultValue={1} hidden/>)
+
+        return getUniqueCart(cart).map(item => <input key={`input_${item.id}`} name={item.product_name} defaultValue={[item.image, item.price, getQuantity(item, cart)]} hidden />)
+    };
+
     return (
         <table style={{width: '100%'}}>
             <thead>
@@ -81,7 +88,12 @@ export default function Cart({user, removeFromCart, cart}) {
                     <td></td>
                     <td></td>
                     <td><b>${getSubtotal(cart)}</b></td>
-                    <td></td>
+                    <td>
+                        <form action={BACKEND_URL + '/api/cart/checkout'} method='POST'>
+                            {generateInputTags()}
+                            <button className="btn btn-success">Checkout</button>
+                        </form>
+                    </td>
 
                 </tr>
             </tbody>
